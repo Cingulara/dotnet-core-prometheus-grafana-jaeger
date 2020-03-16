@@ -29,6 +29,7 @@ services:
     ports:
       - 9090:9090
     volumes:
+      - prometheus-data-volume:/prometheus # persist the data
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     networks:
       - dotnetcorepromgrafanajaeger
@@ -41,13 +42,20 @@ services:
     restart: always
     ports:
       - 3000:3000
+    volumes:
+      - grafana-data-volume:/var/lib/grafana # persist the data
     networks:
       - dotnetcorepromgrafanajaeger
 
   ### Setup the Databases for Persistence
 
-  
+
 
 ### put all the networks here
 networks:
   dotnetcorepromgrafanajaeger:
+
+### put all the volume listings here for persistent data
+volumes:
+  prometheus-data-volume:
+  grafana-data-volume:
