@@ -1,6 +1,7 @@
 version : '3'
  
 services:
+  ### Setup the APIs
   peopleapi:
     image: peopleapi
     ports:
@@ -21,6 +22,7 @@ services:
     networks:
       - dotnetcorepromgrafanajaeger
 
+  ### Setup the Monitoring
   prometheus:
     image: prom/prometheus
     restart: always
@@ -41,6 +43,10 @@ services:
       - 3000:3000
     networks:
       - dotnetcorepromgrafanajaeger
+
+  ### Setup the Databases for Persistence
+
+  
 
 ### put all the networks here
 networks:

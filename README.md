@@ -1,12 +1,24 @@
 # dotnet-core-prometheus-grafana-jaeger
 A demonstration of using .NET Core 2.2, Prometheus, Grafana, and Jaeger with APIs to show metrics, tracing, etc.
 
+# How to Run
+Run `docker-compose up` in the folder you pulled this down into.
+
+# Servers and Ports Setup
+8082 - People API
+
+8084 - Locations API
+
+9090 - Prometheus UI
+
+3000 - Grafana UI
+
 # Prometheus setup
 The Prometheus YML gets added with a volume mount into Prometheus. Inside the Compose file, we have the APIs internally running on 8080 and then exposing them outside of Docker as different ports. You use the "internal to the network" name and port to access the APIs internally. 
 
 ```
 global:
-  scrape_interval:     10s # By default, scrape targets every 5 seconds.
+  scrape_interval:     10s # By default, scrape targets every 10 seconds.
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
