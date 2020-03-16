@@ -9,6 +9,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://*:8080
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=6831
+      - JAEGER_SERVICE_NAME=peopleapi
     networks:
       - dotnetcorepromgrafanajaeger
 
@@ -19,6 +22,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://*:8080
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=6831
+      - JAEGER_SERVICE_NAME=locationsapi
     networks:
       - dotnetcorepromgrafanajaeger
 
@@ -46,10 +52,17 @@ services:
       - grafana-data-volume:/var/lib/grafana # persist the data
     networks:
       - dotnetcorepromgrafanajaeger
-
-  ### Setup the Databases for Persistence
-
-
+  
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "5778:5778/tcp"
+      - "6831:6831/udp"
+      - "16686:16686"
+      - "16687:16687" # Query Service and UI Metrics
+      - "14271:14271" # Agent Metrics
+    networks:
+      - dotnetcorepromgrafanajaeger
 
 ### put all the networks here
 networks:

@@ -19,7 +19,10 @@
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_URLS": "http://*:8084"
+                "ASPNETCORE_URLS": "http://*:8084",
+                "JAEGER_AGENT_HOST": "jaeger",
+                "JAEGER_AGENT_PORT": "6831",
+                "JAEGER_SERVICE_NAME": "locationsapi"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

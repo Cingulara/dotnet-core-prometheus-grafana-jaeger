@@ -9,15 +9,28 @@ global:
 # A scrape configuration containing exactly one endpoint to scrape:
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'peopleapi-read-prometheus'
+  - job_name: 'peopleapi-prometheus'
     # metrics_path defaults to '/metrics'
     static_configs:
     # replace the IP with your local IP for development
     # localhost is not it, as that is w/in the container :)
     - targets: ['peopleapi:8080']
-  - job_name: 'locationsapi-read-prometheus'
+  - job_name: 'locationsapi-prometheus'
     # metrics_path defaults to '/metrics'
     static_configs:
     # replace the IP with your local IP for development
     # localhost is not it, as that is w/in the container :)
     - targets: ['locationsapi:8080']
+  - job_name: 'jaeger-UI-prometheus'
+    # metrics_path defaults to '/metrics'
+    static_configs:
+    # replace the IP with your local IP for development
+    # localhost is not it, as that is w/in the container :)
+    - targets: ['jaeger:16687']
+  - job_name: 'jaeger-Agent-prometheus'
+    # metrics_path defaults to '/metrics'
+    static_configs:
+    # replace the IP with your local IP for development
+    # localhost is not it, as that is w/in the container :)
+    - targets: ['jaeger:14271']
+    

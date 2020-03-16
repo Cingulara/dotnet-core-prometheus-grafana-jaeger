@@ -7,8 +7,6 @@ using Microsoft.Extensions.Logging;
 using Prometheus;
 using OpenTracing;
 using OpenTracing.Util;
-using Jaeger;
-using Jaeger.Samplers;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace peopleapi
@@ -28,16 +26,18 @@ namespace peopleapi
             // Use "OpenTracing.Contrib.NetCore" to automatically generate spans for ASP.NET Core
             services.AddSingleton<ITracer>(serviceProvider =>  
             {  
-                string serviceName = System.Reflection.Assembly.GetEntryAssembly().GetName().Name;  
-            
-                ILoggerFactory loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();  
-            
-                ISampler sampler = new ConstSampler(sample: true);  
-            
-                ITracer tracer = new Tracer.Builder(serviceName)  
-                    .WithLoggerFactory(loggerFactory)  
-                    .WithSampler(sampler)  
-                    .Build();  
+                // string serviceName = System.Reflection.Assembly.GetEntryAssembly().GetName().Name;  
+                // ILoggerFactory loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();  
+                // ISampler sampler = new ConstSampler(sample: true);
+                // //IReporter reporter = new Reporter();
+                // ITracer tracer = new Tracer.Builder(serviceName)  
+                //     .WithLoggerFactory(loggerFactory)
+                //     .WithSampler(sampler)
+                //     .Build();
+                var loggerFactory = new LoggerFactory();
+                // use the environment variables to setup the Jaeger endpoints
+                var config = Jaeger.Configuration.FromEnv(loggerFactory);
+                var tracer = config.GetTracer();
             
                 GlobalTracer.Register(tracer);  
             
