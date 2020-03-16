@@ -12,8 +12,11 @@ services:
       - JAEGER_AGENT_HOST=jaeger
       - JAEGER_AGENT_PORT=6831
       - JAEGER_SERVICE_NAME=peopleapi
+      - JAEGER_SAMPLER_TYPE=const
     networks:
       - dotnetcorepromgrafanajaeger
+    depends_on:
+      - jaeger
 
   locationsapi:
     image: locationsapi
@@ -25,8 +28,11 @@ services:
       - JAEGER_AGENT_HOST=jaeger
       - JAEGER_AGENT_PORT=6831
       - JAEGER_SERVICE_NAME=locationsapi
+      - JAEGER_SAMPLER_TYPE=const
     networks:
       - dotnetcorepromgrafanajaeger
+    depends_on:
+      - jaeger
 
   ### Setup the Monitoring
   prometheus:

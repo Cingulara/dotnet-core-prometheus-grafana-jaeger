@@ -22,7 +22,8 @@
                 "ASPNETCORE_URLS": "http://*:8082",
                 "JAEGER_AGENT_HOST": "jaeger",
                 "JAEGER_AGENT_PORT": "6831",
-                "JAEGER_SERVICE_NAME": "peopleapi"
+                "JAEGER_SERVICE_NAME": "peopleapi",
+                "JAEGER_SAMPLER_TYPE": "const"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
