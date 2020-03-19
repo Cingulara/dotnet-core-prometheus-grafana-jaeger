@@ -64,8 +64,8 @@ services:
     ports:
       - "5778:5778/tcp"
       - "6831:6831/udp"
-      - "16686:16686"
-      - "16687:16687" # Query Service and UI Metrics
+      - "16686:16686" # Query Service and UI Metrics
+      - "16687:16687"
       - "14271:14271" # Agent Metrics
     networks:
       - dotnetcorepromgrafanajaeger
